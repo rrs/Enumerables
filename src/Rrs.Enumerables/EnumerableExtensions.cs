@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data;
+using System.Linq;
 
 namespace Rrs.Enumerables
 {
@@ -30,6 +33,45 @@ namespace Rrs.Enumerables
             {
                 yield return func(e);
             }
+        }
+
+        public static IEnumerable<IDictionary<string, object>> ToDictionary(this IEnumerable<DataRow> rows)
+        {
+            return rows.Select(row => row.ToDictionary());
+        }
+
+        public static IDictionary<string, object> ToDictionary(this DataRow row)
+        {
+            return row.Table.Columns.Cast<DataColumn>().ToDictionary(col => col.ColumnName, col => row.IsNull(col.ColumnName) ? null : row[col.ColumnName]);
+        }
+
+        public static IEnumerable<OrderedDictionary> ToOrderedDictionary(this IEnumerable<DataRow> rows)
+        {
+            return rows.Select(row => row.ToOrderedDictionary());
+        }
+
+        public static OrderedDictionary ToOrderedDictionary(this DataRow row)
+        {
+            var orderedDictionary = new OrderedDictionary();
+
+            var keyValues = row.Table.Columns.Cast<DataColumn>().Select(col => new { key = col.ColumnName, value = row.IsNull(col.ColumnName) ? null : row[col.ColumnName] });
+
+            foreach (var kv in keyValues)
+            {
+                orderedDictionary.Add(kv.key, kv.value);
+            }
+
+            return orderedDictionary;
+        }
+
+        public static IEnumerable<IDictionary<string, object>> ToDictionary(this DataTable table)
+        {
+            return table.Select().ToDictionary();
+        }
+
+        public static IEnumerable<OrderedDictionary> ToOrderedDictionary(this DataTable table)
+        {
+            return table.Select().ToOrderedDictionary();
         }
     }
 }

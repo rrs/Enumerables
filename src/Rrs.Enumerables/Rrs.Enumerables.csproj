@@ -4,10 +4,10 @@
     <Description>Rrs.Enumerables Class Library</Description>
     <Authors>Robert Snipe</Authors>
     <Copyright>Copyright (c) 2018 Robert Snipe</Copyright>
-    <TargetFramework>net40</TargetFramework>
+    <TargetFrameworks>net40;netstandard20</TargetFrameworks>
     <AssemblyName>Rrs.Enumerables</AssemblyName>
     <PackageId>Rrs.Enumerables</PackageId>
-    <PackageTags>Enumerables;Net40</PackageTags>
+    <PackageTags>Enumerables;Net40;NetStandard20</PackageTags>
     <PackageProjectUrl>https://github.com/rrs/Enumerables</PackageProjectUrl>
     <Version>1.0.0</Version>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
