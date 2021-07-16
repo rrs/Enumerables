@@ -85,7 +85,7 @@ namespace Rrs.Enumerables
             }
         }
 
-        public static Spliterator<T> Spliterate<T, TOutIncluded, TOutExcluded>(this IEnumerable<T> enumerable, Predicate<T> predicate)
+        public static Spliterator<T> Spliterate<T>(this IEnumerable<T> enumerable, Predicate<T> predicate)
             => new Spliterator<T>(enumerable, predicate);
     }
 }
