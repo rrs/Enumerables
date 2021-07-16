@@ -85,43 +85,7 @@ namespace Rrs.Enumerables
             }
         }
 
-        public static void Spliterate<T>(this IEnumerable<T> enumerable, Predicate<T> predicate, Action<T> included, Action<T> excluded)
-        {
-            foreach (var e in enumerable)
-            {
-                if (predicate(e))
-                    included(e);
-                else
-                    excluded(e);
-            }
-        }
-
-        public static (IEnumerable<TOutIncluded> included, IEnumerable<TOutExcluded> excluded) Spliterate<T, TOutIncluded, TOutExcluded>(this IEnumerable<T> enumerable, Predicate<T> predicate, Func<T, TOutIncluded> includeSelector, Func<T, TOutExcluded> excludeSelector)
-        {
-            var included = new List<TOutIncluded>();
-            var excluded = new List<TOutExcluded>();
-            foreach (var e in enumerable)
-            {
-                if (predicate(e))
-                    included.Add(includeSelector(e));
-                else
-                    excluded.Add(excludeSelector(e));
-            }
-            return (included, excluded);
-        }
-
-        public static (IEnumerable<TOut> included, IEnumerable<TOut> excluded) Spliterate<T, TOut>(this IEnumerable<T> enumerable, Predicate<T> predicate, Func<T, TOut> selector)
-        {
-            var included = new List<TOut>();
-            var excluded = new List<TOut>();
-            foreach (var e in enumerable)
-            {
-                if (predicate(e))
-                    included.Add(selector(e));
-                else
-                    excluded.Add(selector(e));
-            }
-            return (included, excluded);
-        }
+        public static Spliterator<T> Spliterate<T, TOutIncluded, TOutExcluded>(this IEnumerable<T> enumerable, Predicate<T> predicate)
+            => new Spliterator<T>(enumerable, predicate);
     }
 }
