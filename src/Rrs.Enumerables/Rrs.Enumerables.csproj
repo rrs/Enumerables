@@ -4,7 +4,7 @@
     <Description>Rrs.Enumerables Class Library</Description>
     <Authors>Robert Snipe</Authors>
     <Copyright>Copyright (c) 2018 Robert Snipe</Copyright>
-    <TargetFrameworks>net40;netstandard20</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
     <AssemblyName>Rrs.Enumerables</AssemblyName>
     <PackageId>Rrs.Enumerables</PackageId>
     <PackageTags>Enumerables;Net40;NetStandard20</PackageTags>
