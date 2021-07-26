@@ -20,20 +20,26 @@ namespace Rrs.Enumerables
             return new HashSet<TOut>(enumerable.ForEach(o => func(o)));
         }
 
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> a)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> a) => enumerable.ForEach((o, i) => a(o));
+
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T, int> a)
         {
-            foreach(var e in enumerable)
+            foreach(var (e, i) in enumerable.WithIndex())
             {
-                a(e);
+                a(e, i);
                 yield return e;
             }
         }
 
-        public static IEnumerable<TOut> ForEach<TIn, TOut>(this IEnumerable<TIn> enumerable, Func<TIn, TOut> func)
+        public static IEnumerable<(T, int)> WithIndex<T>(this IEnumerable<T> enumerable) => enumerable?.Select((o, i) => (o, i)) ?? Enumerable.Empty<(T, int)>();
+
+        public static IEnumerable<TOut> ForEach<TIn, TOut>(this IEnumerable<TIn> enumerable, Func<TIn, TOut> func) => enumerable.ForEach((o, i) => func(o));
+
+        public static IEnumerable<TOut> ForEach<TIn, TOut>(this IEnumerable<TIn> enumerable, Func<TIn, int, TOut> func)
         {
-            foreach (var e in enumerable)
+            foreach (var (e, i) in enumerable.WithIndex())
             {
-                yield return func(e);
+                yield return func(e, i);
             }
         }
 

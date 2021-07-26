@@ -34,6 +34,8 @@ namespace Rrs.Enumerables
             return (included, excluded);
         }
 
+        public (IEnumerable<T> included, IEnumerable<T> excluded) ToLists() => Select(o => o);
+
         public void ForEach(Action<T> includedAction, Action<T> excludedAction)
         {
             foreach (var e in _enumerable)
@@ -44,5 +46,7 @@ namespace Rrs.Enumerables
                     excludedAction(e);
             }
         }
+
+
     }
 }
