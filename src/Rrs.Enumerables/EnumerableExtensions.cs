@@ -79,7 +79,7 @@ namespace Rrs.Enumerables
 
         public static IEnumerable<OrderedDictionary> ToOrderedDictionary(this DataTable table)
         {
-            return table.Select().ToOrderedDictionary();
+            return table.Rows.Cast<DataRow>().ToOrderedDictionary();
         }
 
         public static IEnumerable<TOut> SelectTry<TIn, TOut>(this IEnumerable<TIn> enumerable, TryFunc<TIn, TOut> selector)
