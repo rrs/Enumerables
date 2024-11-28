@@ -12,7 +12,7 @@ namespace Rrs.Enumerables
         private readonly Predicate<T> _predicate;
         internal Spliterator(IEnumerable<T> enumerable, Predicate<T> predicate) => (_enumerable, _predicate) = (enumerable, predicate);
 
-        public (IEnumerable<T> included, IEnumerable<T> excluded) Select<TOut>() => Select(o => o, o => o);
+        public (IEnumerable<T> included, IEnumerable<T> excluded) Select() => Select(o => o, o => o);
         public (IEnumerable<TOut> included, IEnumerable<TOut> excluded) Select<TOut>(SplitSelector<T, TOut> selector) => Select(selector, selector);
         public (IEnumerable<TOut> included, IEnumerable<TOut> excluded) Select<TOut>(SplitIndexedSelector<T, TOut> selector) => Select(selector, selector);
 
